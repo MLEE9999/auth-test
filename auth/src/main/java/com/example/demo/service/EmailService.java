@@ -13,7 +13,7 @@ public class EmailService {
 
     public void sendVerificationEmail(String toEmail, String token) {
         String subject = "이메일 인증 요청";
-        String verificationUrl = "http://localhost:8080/auth/verify-email?token=" + token;
+        String verificationUrl = "https://localhost/auth/verify-email?token=" + token;
         String message = "아래 링크를 클릭해서 이메일 인증을 완료하세요:\n" + verificationUrl;
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
@@ -21,6 +21,14 @@ public class EmailService {
         mailMessage.setSubject(subject);
         mailMessage.setText(message);
 
-        mailSender.send(mailMessage);
+        try {
+            mailSender.send(mailMessage);
+            System.out.println("✅ Email sent to: " + toEmail);
+            System.out.println("🔗 인증 URL: " + verificationUrl);
+            System.out.println("🔑 토큰: " + token);
+        } catch (Exception e) {
+            System.err.println("❌ Email send failed: " + e.getMessage());
+            throw new RuntimeException("이메일 전송 실패");
+        }
     }
 }

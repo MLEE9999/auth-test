@@ -27,6 +27,7 @@ public class UserService {
         if(userRepository.findByEmail(req.getEmail()).isPresent()){
             return "이미 가입된 이메일입니다.";
         }
+
         User user = User.builder()
                 .email(req.getEmail())
                 .password(passwordEncoder.encode(req.getPassword()))
@@ -35,6 +36,7 @@ public class UserService {
         userRepository.save(user);
 
         String token = UUID.randomUUID().toString();
+
         EmailVerificationToken verificationToken = EmailVerificationToken.builder()
                 .token(token)
                 .user(user)
@@ -42,7 +44,11 @@ public class UserService {
                 .build();
         emailVerificationTokenRepository.save(verificationToken);
 
-        emailService.sendVerificationEmail(user.getEmail(), token);
+        try {
+            emailService.sendVerificationEmail(user.getEmail(), token);
+        } catch (Exception e) {
+            System.err.println("이메일 발송 실패: " + e.getMessage());
+        }
         return "회원가입 완료, 이메일 인증 메일을 확인하세요.";
     }
 
@@ -62,5 +68,35 @@ public class UserService {
         emailVerificationTokenRepository.delete(verificationToken);
 
         return "이메일 인증 성공";
+    }
+
+    @Transactional
+    public String resendVerificationEmail(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("등록되지 않은 이메일입니다."));
+
+        if (user.isEmailVerified()) {
+            return "이미 인증된 이메일입니다.";
+        }
+
+        // 기존 토큰 삭제 (있다면)
+        emailVerificationTokenRepository.deleteByUser(user);
+
+        String newToken = UUID.randomUUID().toString();
+        EmailVerificationToken newVerificationToken = EmailVerificationToken.builder()
+                .token(newToken)
+                .user(user)
+                .expiryDate(LocalDateTime.now().plusDays(1))
+                .build();
+        emailVerificationTokenRepository.save(newVerificationToken);
+
+        try {
+            emailService.sendVerificationEmail(user.getEmail(), newToken);
+        } catch (Exception e) {
+            System.err.println("이메일 재발송 실패: " + e.getMessage());
+            return "이메일 재발송에 실패했습니다.";
+        }
+
+        return "새로운 인증 메일을 발송했습니다.";
     }
 }

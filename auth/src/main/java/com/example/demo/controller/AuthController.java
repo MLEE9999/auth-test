@@ -28,8 +28,9 @@ public class AuthController {
 
     @PostMapping("/login")
     public UserResponse login(@RequestBody @Valid UserRequest req) {
-        User user = userRepository.findByEmail(req.getEmail()).orElseThrow(() -> new RuntimeException("등록되지 않은 이메일입니다."));
-        if(!user.isEmailVerified()){
+        User user = userRepository.findByEmail(req.getEmail())
+                .orElseThrow(() -> new RuntimeException("등록되지 않은 이메일입니다."));
+        if (!user.isEmailVerified()) {
             throw new RuntimeException("이메일 인증이 완료되지 않았습니다.");
         }
         if (!passwordEncoder.matches(req.getPassword(), user.getPassword())) {
@@ -47,5 +48,11 @@ public class AuthController {
     @GetMapping("/verify-email")
     public String verifyEmail(@RequestParam("token") String token) {
         return userService.verifyEmail(token);
+    }
+
+    // 재발급 API 추가
+    @PostMapping("/resend-verification")
+    public String resendVerificationEmail(@RequestParam String email) {
+        return userService.resendVerificationEmail(email);
     }
 }

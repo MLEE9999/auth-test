@@ -12,12 +12,23 @@ spring:
     console:
       enabled: true
       path: /h2-console
+      settings.web-allow-others: true
 
   mail:
-    host: smtp.gmail.com
-    port: 587
-    username: cs994824@gmail.com
-    password: mgbjguchbttsjddv
+    host: smtp.mailtrap.io
+    port: 2525
+    username: 
+    password: 
     properties:
-      mail.smtp.auth: true
-      mail.smtp.starttls.enable: true
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+      
+logging:
+  file:
+    name: logs/app.log
+  level:
+    root: WARN
+    org.springframework.security: DEBUG
