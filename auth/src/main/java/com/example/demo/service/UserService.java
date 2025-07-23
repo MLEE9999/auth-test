@@ -125,7 +125,7 @@ public class UserService {
         passwordResetTokenRepository.save(resetToken);
 
         // 이메일 발송 (이메일 템플릿과 URL은 상황에 맞게 변경)
-        String resetUrl = "https://your-domain.com/auth/reset-password?token=" + token;
+        String resetUrl = "https://8080-mlee9999-authtest-q05q86trbs2.ws-us120.gitpod.io/auth/reset-password?token=" + token;
         emailService.sendPasswordResetEmail(user.getEmail(), resetUrl);
 
         return "비밀번호 재설정 메일을 발송했습니다. 이메일을 확인하세요.";
@@ -148,5 +148,21 @@ public class UserService {
 
         return "비밀번호가 성공적으로 변경되었습니다.";
     }
+
+    public void changePassword(String email, PasswordChangeRequest request) {
+        User user = userRepository.findByEmail(email)
+            .orElseThrow(() -> new RuntimeException("해당 사용자를 찾을 수 없습니다."));
+
+        if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
+            throw new RuntimeException("현재 비밀번호가 일치하지 않습니다.");
+        }
+
+        if (!request.getNewPassword().equals(request.getConfirmPassword())) {
+            throw new RuntimeException("새 비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+        }
+
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        userRepository.save(user);
+    }   
 
 }

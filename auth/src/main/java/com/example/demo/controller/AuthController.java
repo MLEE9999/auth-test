@@ -63,4 +63,13 @@ public class AuthController {
     public String confirmPasswordReset(@RequestBody @Valid PasswordResetConfirmRequest request) {
         return userService.confirmPasswordReset(request);
     }
+
+    @PutMapping("/auth/change-password")
+    public ResponseEntity<?> changePassword(@RequestBody @Valid PasswordChangeRequest request,
+                                            Authentication authentication) {
+        String email = authentication.getName();
+        userService.changePassword(email, request);
+        return ResponseEntity.ok("비밀번호가 성공적으로 변경되었습니다.");
+    }
+
 }
