@@ -1,0 +1,51 @@
+package com.example.demo.controller;
+
+import com.example.demo.dto.UserRequest;
+import com.example.demo.dto.UserResponse;
+import com.example.demo.entity.User;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.security.JwtUtil;
+import com.example.demo.service.UserService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/auth")
+@RequiredArgsConstructor
+public class AuthController {
+
+    private final UserService userService;
+    private final JwtUtil jwtUtil;
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+
+    @PostMapping("/register")
+    public String register(@RequestBody @Valid UserRequest req) {
+        return userService.registerUser(req);
+    }
+
+    @PostMapping("/login")
+    public UserResponse login(@RequestBody @Valid UserRequest req) {
+        User user = userRepository.findByEmail(req.getEmail()).orElseThrow(() -> new RuntimeException("등록되지 않은 이메일입니다."));
+        if(!user.isEmailVerified()){
+            throw new RuntimeException("이메일 인증이 완료되지 않았습니다.");
+        }
+        if (!passwordEncoder.matches(req.getPassword(), user.getPassword())) {
+            throw new RuntimeException("비밀번호 불일치");
+        }
+
+        String token = jwtUtil.generateToken(user.getEmail());
+        String refreshToken = jwtUtil.generateToken(user.getEmail());
+        user.setRefreshToken(refreshToken);
+        userRepository.save(user);
+
+        return new UserResponse(token, refreshToken);
+    }
+
+    @GetMapping("/verify-email")
+    public String verifyEmail(@RequestParam("token") String token) {
+        return userService.verifyEmail(token);
+    }
+}
