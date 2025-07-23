@@ -762,3 +762,95 @@ java.sql.SQLException: Connection is closed
 2025-07-23T05:43:21.183Z DEBUG 51264 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/stylesheet.css
 2025-07-23T05:47:13.413Z  WARN 53319 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
 2025-07-23T05:47:13.737Z  INFO 53319 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3280a79a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@79fbcef4, org.springframework.security.web.context.SecurityContextHolderFilter@608b74f3, org.springframework.security.web.header.HeaderWriterFilter@139da216, org.springframework.web.filter.CorsFilter@770be0d0, org.springframework.security.web.authentication.logout.LogoutFilter@12f32f99, com.example.demo.security.JwtFilter@768f2398, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5a6f1342, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@650d5a3d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6c54d0dc, org.springframework.security.web.access.ExceptionTranslationFilter@2f6f2d91, org.springframework.security.web.access.intercept.AuthorizationFilter@318f47f1]
+2025-07-23T05:52:06.115Z DEBUG 53319 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /h2-console/query.do?jsessionid=a09d8d9abc514dce313ec6566adf94e0
+2025-07-23T05:52:06.123Z DEBUG 53319 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /h2-console/query.do?jsessionid=a09d8d9abc514dce313ec6566adf94e0
+2025-07-23T05:52:06.271Z DEBUG 53319 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/stylesheet.css
+2025-07-23T05:52:06.271Z DEBUG 53319 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/stylesheet.css
+2025-07-23T05:52:06.531Z DEBUG 53319 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/login.jsp?jsessionid=c6c9d7cfb57eaf5ee3e711678c325fdf
+2025-07-23T05:52:06.532Z DEBUG 53319 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/login.jsp?jsessionid=c6c9d7cfb57eaf5ee3e711678c325fdf
+2025-07-23T05:52:06.682Z DEBUG 53319 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/login.jsp
+2025-07-23T05:52:06.682Z DEBUG 53319 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/login.jsp
+2025-07-23T05:52:06.684Z DEBUG 53319 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/background.gif
+2025-07-23T05:52:06.685Z DEBUG 53319 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/background.gif
+2025-07-23T05:52:06.843Z DEBUG 53319 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/login.jsp?jsessionid=03a3ea25133be77fed64f652f5bf062c
+2025-07-23T05:52:06.844Z DEBUG 53319 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/login.jsp?jsessionid=03a3ea25133be77fed64f652f5bf062c
+2025-07-23T05:52:06.993Z DEBUG 53319 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/background.gif
+2025-07-23T05:52:06.993Z DEBUG 53319 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/background.gif
+2025-07-23T05:52:07.125Z DEBUG 53319 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /favicon.ico
+2025-07-23T05:52:07.127Z DEBUG 53319 --- [http-nio-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-07-23T05:52:07.128Z DEBUG 53319 --- [http-nio-8080-exec-8] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2025-07-23T05:52:07.136Z DEBUG 53319 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /error
+2025-07-23T05:52:07.137Z DEBUG 53319 --- [http-nio-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-07-23T05:52:07.146Z DEBUG 53319 --- [http-nio-8080-exec-8] o.s.s.w.s.HttpSessionRequestCache        : Saved request http://8080-mlee9999-authtest-q05q86trbs2.ws-us120.gitpod.io/error?continue to session
+2025-07-23T05:52:07.146Z DEBUG 53319 --- [http-nio-8080-exec-8] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2025-07-23T05:52:09.009Z DEBUG 53319 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing POST /h2-console/login.do?jsessionid=03a3ea25133be77fed64f652f5bf062c
+2025-07-23T05:52:09.010Z DEBUG 53319 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured POST /h2-console/login.do?jsessionid=03a3ea25133be77fed64f652f5bf062c
+2025-07-23T05:52:09.161Z DEBUG 53319 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/header.jsp?jsessionid=03a3ea25133be77fed64f652f5bf062c
+2025-07-23T05:52:09.161Z DEBUG 53319 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/tables.do?jsessionid=03a3ea25133be77fed64f652f5bf062c
+2025-07-23T05:52:09.162Z DEBUG 53319 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/header.jsp?jsessionid=03a3ea25133be77fed64f652f5bf062c
+2025-07-23T05:52:09.162Z DEBUG 53319 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/tables.do?jsessionid=03a3ea25133be77fed64f652f5bf062c
+2025-07-23T05:52:09.162Z DEBUG 53319 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/query.jsp?jsessionid=03a3ea25133be77fed64f652f5bf062c
+2025-07-23T05:52:09.162Z DEBUG 53319 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/help.jsp?jsessionid=03a3ea25133be77fed64f652f5bf062c
+2025-07-23T05:52:09.162Z DEBUG 53319 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/query.jsp?jsessionid=03a3ea25133be77fed64f652f5bf062c
+2025-07-23T05:52:09.163Z DEBUG 53319 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/help.jsp?jsessionid=03a3ea25133be77fed64f652f5bf062c
+2025-07-23T05:52:09.296Z DEBUG 53319 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/icon_line.gif
+2025-07-23T05:52:09.296Z DEBUG 53319 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/icon_disconnect.gif
+2025-07-23T05:52:09.297Z DEBUG 53319 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/icon_disconnect.gif
+2025-07-23T05:52:09.297Z DEBUG 53319 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/icon_line.gif
+2025-07-23T05:52:09.305Z DEBUG 53319 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/icon_rollback.gif
+2025-07-23T05:52:09.305Z DEBUG 53319 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/icon_refresh.gif
+2025-07-23T05:52:09.306Z DEBUG 53319 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/icon_rollback.gif
+2025-07-23T05:52:09.306Z DEBUG 53319 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/icon_refresh.gif
+2025-07-23T05:52:09.306Z DEBUG 53319 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/icon_run.gif
+2025-07-23T05:52:09.306Z DEBUG 53319 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/icon_commit.gif
+2025-07-23T05:52:09.307Z DEBUG 53319 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/icon_run.gif
+2025-07-23T05:52:09.307Z DEBUG 53319 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/icon_run_selected.gif
+2025-07-23T05:52:09.307Z DEBUG 53319 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/icon_commit.gif
+2025-07-23T05:52:09.307Z DEBUG 53319 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/icon_run_selected.gif
+2025-07-23T05:52:09.308Z DEBUG 53319 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/icon_history.gif
+2025-07-23T05:52:09.308Z DEBUG 53319 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/icon_help.gif
+2025-07-23T05:52:09.308Z DEBUG 53319 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/icon_stop.gif
+2025-07-23T05:52:09.308Z DEBUG 53319 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/icon_history.gif
+2025-07-23T05:52:09.308Z DEBUG 53319 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/icon_stop.gif
+2025-07-23T05:52:09.308Z DEBUG 53319 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/icon_help.gif
+2025-07-23T05:52:09.340Z DEBUG 53319 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/tree.js
+2025-07-23T05:52:09.340Z DEBUG 53319 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/tree.js
+2025-07-23T05:52:09.473Z DEBUG 53319 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/tree_plus.gif
+2025-07-23T05:52:09.473Z DEBUG 53319 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/tree_minus.gif
+2025-07-23T05:52:09.473Z DEBUG 53319 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/tree_database.gif
+2025-07-23T05:52:09.473Z DEBUG 53319 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/tree_table.gif
+2025-07-23T05:52:09.473Z DEBUG 53319 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/tree_plus.gif
+2025-07-23T05:52:09.473Z DEBUG 53319 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/tree_database.gif
+2025-07-23T05:52:09.473Z DEBUG 53319 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/tree_minus.gif
+2025-07-23T05:52:09.474Z DEBUG 53319 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/tree_table.gif
+2025-07-23T05:52:09.474Z DEBUG 53319 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/tree_empty.gif
+2025-07-23T05:52:09.474Z DEBUG 53319 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/tree_type.gif
+2025-07-23T05:52:09.474Z DEBUG 53319 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/tree_column.gif
+2025-07-23T05:52:09.474Z DEBUG 53319 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/tree_empty.gif
+2025-07-23T05:52:09.475Z DEBUG 53319 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/tree_type.gif
+2025-07-23T05:52:09.475Z DEBUG 53319 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/tree_column.gif
+2025-07-23T05:52:09.475Z DEBUG 53319 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/tree_folder.gif
+2025-07-23T05:52:09.475Z DEBUG 53319 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/tree_index_az.gif
+2025-07-23T05:52:09.475Z DEBUG 53319 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/tree_users.gif
+2025-07-23T05:52:09.475Z DEBUG 53319 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/tree_folder.gif
+2025-07-23T05:52:09.476Z DEBUG 53319 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/tree_index_az.gif
+2025-07-23T05:52:09.476Z DEBUG 53319 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/tree_users.gif
+2025-07-23T05:52:09.476Z DEBUG 53319 --- [http-nio-8080-exec-12] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/tree_info.gif
+2025-07-23T05:52:09.476Z DEBUG 53319 --- [http-nio-8080-exec-11] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/tree_index.gif
+2025-07-23T05:52:09.476Z DEBUG 53319 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/tree_user.gif
+2025-07-23T05:52:09.476Z DEBUG 53319 --- [http-nio-8080-exec-12] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/tree_info.gif
+2025-07-23T05:52:09.476Z DEBUG 53319 --- [http-nio-8080-exec-11] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/tree_index.gif
+2025-07-23T05:52:09.476Z DEBUG 53319 --- [http-nio-8080-exec-13] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/tree_view.gif
+2025-07-23T05:52:09.477Z DEBUG 53319 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/tree_user.gif
+2025-07-23T05:52:09.477Z DEBUG 53319 --- [http-nio-8080-exec-13] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/tree_view.gif
+2025-07-23T05:52:09.609Z DEBUG 53319 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /favicon.ico
+2025-07-23T05:52:09.610Z DEBUG 53319 --- [http-nio-8080-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-07-23T05:52:09.610Z DEBUG 53319 --- [http-nio-8080-exec-5] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2025-07-23T05:52:09.611Z DEBUG 53319 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /error
+2025-07-23T05:52:09.611Z DEBUG 53319 --- [http-nio-8080-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-07-23T05:52:09.612Z DEBUG 53319 --- [http-nio-8080-exec-5] o.s.s.w.s.HttpSessionRequestCache        : Saved request http://8080-mlee9999-authtest-q05q86trbs2.ws-us120.gitpod.io/error?continue to session
+2025-07-23T05:52:09.612Z DEBUG 53319 --- [http-nio-8080-exec-5] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2025-07-23T05:52:11.892Z DEBUG 53319 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing POST /h2-console/query.do?jsessionid=03a3ea25133be77fed64f652f5bf062c
+2025-07-23T05:52:11.893Z DEBUG 53319 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured POST /h2-console/query.do?jsessionid=03a3ea25133be77fed64f652f5bf062c
+2025-07-23T05:52:12.033Z DEBUG 53319 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /h2-console/table.js
+2025-07-23T05:52:12.033Z DEBUG 53319 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /h2-console/table.js

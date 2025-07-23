@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.PasswordResetConfirmRequest;
+import com.example.demo.dto.PasswordResetRequest;
 import com.example.demo.dto.UserRequest;
 import com.example.demo.dto.UserResponse;
 import com.example.demo.entity.User;
@@ -30,7 +32,7 @@ public class AuthController {
     public UserResponse login(@RequestBody @Valid UserRequest req) {
         User user = userRepository.findByEmail(req.getEmail())
                 .orElseThrow(() -> new RuntimeException("등록되지 않은 이메일입니다."));
-        if (!user.isEmailVerified()) {
+        if(!user.isEmailVerified()){
             throw new RuntimeException("이메일 인증이 완료되지 않았습니다.");
         }
         if (!passwordEncoder.matches(req.getPassword(), user.getPassword())) {
@@ -50,9 +52,15 @@ public class AuthController {
         return userService.verifyEmail(token);
     }
 
-    // 재발급 API 추가
-    @PostMapping("/resend-verification")
-    public String resendVerificationEmail(@RequestParam String email) {
-        return userService.resendVerificationEmail(email);
+    // 비밀번호 재설정 요청 API
+    @PostMapping("/password-reset/request")
+    public String requestPasswordReset(@RequestBody @Valid PasswordResetRequest request) {
+        return userService.requestPasswordReset(request);
+    }
+
+    // 비밀번호 재설정 확정 API
+    @PostMapping("/password-reset/confirm")
+    public String confirmPasswordReset(@RequestBody @Valid PasswordResetConfirmRequest request) {
+        return userService.confirmPasswordReset(request);
     }
 }

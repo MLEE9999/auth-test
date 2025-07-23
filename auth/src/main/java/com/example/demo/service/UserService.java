@@ -99,4 +99,46 @@ public class UserService {
 
         return "새로운 인증 메일을 발송했습니다.";
     }
+
+    @Transactional
+    public String createPasswordResetToken(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("등록되지 않은 이메일입니다."));
+
+        String token = UUID.randomUUID().toString();
+        PasswordResetToken resetToken = PasswordResetToken.builder()
+                .token(token)
+                .user(user)
+                .expiryDate(LocalDateTime.now().plusHours(1)) // 1시간 유효
+                .build();
+
+        passwordResetTokenRepository.save(resetToken);
+
+        try {
+            emailService.sendPasswordResetEmail(user.getEmail(), token);
+        } catch (Exception e) {
+            System.err.println("비밀번호 재설정 이메일 발송 실패: " + e.getMessage());
+        }
+
+        return "비밀번호 재설정 메일을 발송했습니다.";
+    }
+
+    @Transactional
+    public String resetPassword(String token, String newPassword) {
+        PasswordResetToken resetToken = passwordResetTokenRepository.findByToken(token)
+                .orElseThrow(() -> new RuntimeException("유효하지 않은 토큰입니다."));
+
+        if (resetToken.getExpiryDate().isBefore(LocalDateTime.now())) {
+            return "토큰이 만료되었습니다.";
+        }
+
+        User user = resetToken.getUser();
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+
+        passwordResetTokenRepository.delete(resetToken);
+
+        return "비밀번호가 성공적으로 변경되었습니다.";
+    }
+
 }
