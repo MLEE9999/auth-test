@@ -1,10 +1,15 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.UserRequest;
+import com.example.demo.dto.PasswordResetRequest;
+import com.example.demo.dto.PasswordResetConfirmRequest;
+
 import com.example.demo.entity.EmailVerificationToken;
 import com.example.demo.entity.User;
 import com.example.demo.repository.EmailVerificationTokenRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.entity.PasswordResetToken;
+import com.example.demo.repository.PasswordResetTokenRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +27,7 @@ public class UserService {
     private final EmailVerificationTokenRepository emailVerificationTokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
+    private final PasswordResetTokenRepository passwordResetTokenRepository;
 
     @Transactional
     public String registerUser(UserRequest req) {
@@ -101,31 +108,32 @@ public class UserService {
     }
 
     @Transactional
-    public String createPasswordResetToken(String email) {
-        User user = userRepository.findByEmail(email)
+    public String requestPasswordReset(PasswordResetRequest request) {
+        User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("등록되지 않은 이메일입니다."));
 
+        // 기존에 있던 토큰 있으면 삭제
+        passwordResetTokenRepository.deleteByUser(user);
+
         String token = UUID.randomUUID().toString();
+
         PasswordResetToken resetToken = PasswordResetToken.builder()
                 .token(token)
                 .user(user)
-                .expiryDate(LocalDateTime.now().plusHours(1)) // 1시간 유효
+                .expiryDate(LocalDateTime.now().plusHours(1)) // 1시간 유효기간
                 .build();
-
         passwordResetTokenRepository.save(resetToken);
 
-        try {
-            emailService.sendPasswordResetEmail(user.getEmail(), token);
-        } catch (Exception e) {
-            System.err.println("비밀번호 재설정 이메일 발송 실패: " + e.getMessage());
-        }
+        // 이메일 발송 (이메일 템플릿과 URL은 상황에 맞게 변경)
+        String resetUrl = "https://your-domain.com/auth/reset-password?token=" + token;
+        emailService.sendPasswordResetEmail(user.getEmail(), resetUrl);
 
-        return "비밀번호 재설정 메일을 발송했습니다.";
+        return "비밀번호 재설정 메일을 발송했습니다. 이메일을 확인하세요.";
     }
 
     @Transactional
-    public String resetPassword(String token, String newPassword) {
-        PasswordResetToken resetToken = passwordResetTokenRepository.findByToken(token)
+    public String confirmPasswordReset(PasswordResetConfirmRequest request) {
+        PasswordResetToken resetToken = passwordResetTokenRepository.findByToken(request.getToken())
                 .orElseThrow(() -> new RuntimeException("유효하지 않은 토큰입니다."));
 
         if (resetToken.getExpiryDate().isBefore(LocalDateTime.now())) {
@@ -133,7 +141,7 @@ public class UserService {
         }
 
         User user = resetToken.getUser();
-        user.setPassword(passwordEncoder.encode(newPassword));
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         userRepository.save(user);
 
         passwordResetTokenRepository.delete(resetToken);
