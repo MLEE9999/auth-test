@@ -28,6 +28,7 @@ public class EmailService {
             System.out.println("🔑 토큰: " + token);
         } catch (Exception e) {
             System.err.println("❌ Email send failed: " + e.getMessage());
+            System.out.println("🔗 인증 URL: " + verificationUrl);
             throw new RuntimeException("이메일 전송 실패");
         }
     }

@@ -2,15 +2,23 @@ package com.example.demo.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.util.Date;
 
 @Component
 public class JwtUtil {
 
-    private final String SECRET_KEY = "your-secret-key-should-be-very-secure"; // 변경하세요
+    // 최소 256비트 (32바이트) 이상 문자열 사용 권장
+    private final String SECRET_KEY = "";
+
+    // Key 객체 생성
+    private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
+
     private final long EXPIRATION_TIME = 1000 * 60 * 60 * 10; // 10시간
 
     public String generateToken(String email) {
@@ -18,7 +26,7 @@ public class JwtUtil {
                 .setSubject(email)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
@@ -32,8 +40,9 @@ public class JwtUtil {
     }
 
     private Claims getClaims(String token) {
-        return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
                 .parseClaimsJws(token)
                 .getBody();
     }

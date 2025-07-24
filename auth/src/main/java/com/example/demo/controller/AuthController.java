@@ -12,6 +12,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import com.example.demo.dto.PasswordChangeRequest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 
 @RestController
 @RequestMapping("/auth")
@@ -30,12 +33,24 @@ public class AuthController {
 
     @PostMapping("/login")
     public UserResponse login(@RequestBody @Valid UserRequest req) {
+        // User user = userRepository.findByEmail(req.getEmail())
+        //         .orElseThrow(() -> new RuntimeException("등록되지 않은 이메일입니다."));
         User user = userRepository.findByEmail(req.getEmail())
-                .orElseThrow(() -> new RuntimeException("등록되지 않은 이메일입니다."));
+            .orElse(null);
+        System.out.println("로그 확인용");
+        System.out.println(user);
+        System.out.println(user.getEmail());
+        
+        if(user == null){
+            System.out.println("사용자 문제");
+            throw new RuntimeException("등록되지 않은 사용자 입니다");
+        }
         if(!user.isEmailVerified()){
+            System.out.println("이메일 문제");
             throw new RuntimeException("이메일 인증이 완료되지 않았습니다.");
         }
         if (!passwordEncoder.matches(req.getPassword(), user.getPassword())) {
+            System.out.println("비밀번호 문제");
             throw new RuntimeException("비밀번호 불일치");
         }
 

@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dto.UserRequest;
 import com.example.demo.dto.PasswordResetRequest;
 import com.example.demo.dto.PasswordResetConfirmRequest;
+import com.example.demo.dto.PasswordChangeRequest;
 
 import com.example.demo.entity.EmailVerificationToken;
 import com.example.demo.entity.User;
