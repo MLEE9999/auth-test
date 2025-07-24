@@ -8,7 +8,7 @@
 - H2 인메모리 DB 및 Gmail SMTP 설정 포함
 
 ## 실행 방법
-1. `application.yml`에 Gmail SMTP 설정 변경 (username, password)
+1. `application.yml`에 Gmail SMTP 설정 변경 (username, password) => Mailtrap으로 테스트중 username password 따로 구해야함
 2. JDK 17 이상 설치
 3. 프로젝트 빌드 및 실행 (`./gradlew bootRun` or IDE 실행)
 4. Postman 등으로 API 테스트
