@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
-import api from "../api"; // axios 인스턴스
-import { toast } from "react-toastify";
+import api from "../api"; // axios 인스턴스 (baseURL 등 설정된 상태)
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
 
 function Stars() {
@@ -17,7 +18,6 @@ function Stars() {
       return <div key={i} className="star" style={style}></div>;
     });
   }, []); // 한 번만 생성
-
   return <div className="stars">{stars}</div>;
 }
 
@@ -35,9 +35,14 @@ function Login() {
       localStorage.setItem("accessToken", res.data.token);
       localStorage.setItem("refreshToken", res.data.refreshToken);
       toast.success("로그인 성공!");
-      // 로그인 후 리다이렉트 등 추가 가능
+      // TODO: 로그인 후 페이지 이동 등
     } catch (err) {
-      toast.error(err.response?.data || "로그인 실패");
+      // 서버에서 내려준 메시지 보여주기
+      const msg =
+        err.response?.data ||
+        err.message ||
+        "로그인 중 오류가 발생했습니다.";
+      toast.error(msg);
     } finally {
       setLoading(false);
     }
@@ -46,9 +51,7 @@ function Login() {
   return (
     <div className="login-wrapper">
       <Stars />
-      <header className="header">
-        My Awesome App
-      </header>
+      <header className="header">이미지 광고 서비스</header>
       <form className="login-container" onSubmit={handleSubmit}>
         <h2 className="login-title">로그인</h2>
 
@@ -69,6 +72,7 @@ function Login() {
             placeholder="비밀번호"
             onChange={(e) => setPassword(e.target.value)}
             className="login-input"
+            required
           />
           <button
             type="button"
@@ -82,19 +86,15 @@ function Login() {
           </button>
         </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="login-button"
-        >
+        <button type="submit" disabled={loading} className="login-button">
           {loading ? "로딩중..." : "로그인"}
         </button>
 
         <div className="login-footer">
-          <a href="/register">회원가입</a> |{" "}
-          <a href="/password-reset">비밀번호 재설정</a>
+          <a href="/register">회원가입</a> | <a href="/password-reset">비밀번호 재설정</a>
         </div>
       </form>
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 }
