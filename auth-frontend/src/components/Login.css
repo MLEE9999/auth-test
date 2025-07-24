@@ -146,10 +146,12 @@ html, body, #root {
 
 .show-password-btn:hover {
   color: rgba(125, 90, 150, 1);  /* 호버시 진하게 */
+  cursor: default;
 }
 
 .show-password-btn:active {
   filter: brightness(0.8);
+  cursor: default;
 }
 
 .login-button {
