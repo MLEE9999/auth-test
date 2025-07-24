@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import api from "../api"; // axios 인스턴스 (baseURL 등 설정된 상태)
+import {api} from "../api"; // axios 인스턴스 (baseURL 등 설정된 상태)
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";

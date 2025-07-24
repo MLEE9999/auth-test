@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import PasswordResetRequest from "./components/PasswordResetRequest";
+import PasswordResetConfirm from "./components/PasswordResetConfirm";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -13,7 +15,9 @@ function App() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        {/* 다른 경로 추가 가능 */}
+        <Route path="/password-reset" element={<PasswordResetRequest />} />
+        <Route path="/password-reset/confirm" element={<PasswordResetConfirm />} />
+
       </Routes>
     </BrowserRouter>
   );

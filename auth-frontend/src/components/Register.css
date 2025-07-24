@@ -228,3 +228,52 @@ html, body, #root {
   color: #7d5a96;
   text-decoration: underline;
 }
+
+/* 모달 배경 */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(75, 59, 101, 0.85); /* 기존 배경색 계열에 약간 투명도 추가 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* 모달 박스 */
+.modal-box {
+  background-color: #fef6f9; /* 기존 폼 배경색과 통일 */
+  padding: 30px 40px;
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(100, 100, 150, 0.25);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  color: #7d5a96; /* 기존 텍스트 톤과 맞춤 */
+  font-weight: 700;
+  font-size: 1.3rem;
+  user-select: none;
+}
+
+/* 확인 버튼 */
+.modal-confirm-btn {
+  margin-top: 20px;
+  padding: 12px 28px;
+  background-color: #b794f4;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+.modal-confirm-btn:hover {
+  background-color: #a078e0;
+}
+
+.modal-confirm-btn:active {
+  background-color: #7d5a96;
+}

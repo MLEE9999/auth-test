@@ -1,8 +1,10 @@
-// src/api.js
+// api.js
 import axios from "axios";
 
+const baseURL = "https://8080-mlee9999-authtest-q05q86trbs2.ws-us120.gitpod.io";
+
 const api = axios.create({
-  baseURL: "https://8080-mlee9999-authtest-q05q86trbs2.ws-us120.gitpod.io", // 백엔드 주소
+  baseURL,
   withCredentials: true,
 });
 
@@ -14,4 +16,10 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-export default api;
+// 인증 필요 없는 API 전용 인스턴스 (헤더 설정 없음)
+const noAuthApi = axios.create({
+  baseURL,
+  withCredentials: true,
+});
+
+export { api, noAuthApi };
