@@ -17,3 +17,8 @@
 - POST /auth/register : 회원가입 요청
 - POST /auth/login : 로그인 요청
 - GET /auth/verify-email?token= : 이메일 인증 요청
+
+## 서버
+- auth-test 에서 ./gradlew bootRun
+- cd auth-frontend 이동 후 npm start
+- 자바 버전 관련 오류 발생 시 sdk install java 17.0.10-tem
