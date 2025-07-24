@@ -27,7 +27,14 @@ public class SecurityConfig {
             .cors().and()
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/register", "/auth/login", "/auth/verify-email", "/h2-console/**").permitAll()
+                .requestMatchers(
+                "/auth/login",
+                "/auth/register",
+                "/auth/password-reset/request",
+                "/auth/password-reset/confirm",
+                "/auth/verify-email",
+                "/h2-console/**"
+                ).permitAll()
                 .anyRequest().authenticated()
             )
             .headers(headers -> headers.frameOptions().disable())

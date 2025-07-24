@@ -28,8 +28,13 @@ public class AuthController {
     private final UserRepository userRepository;
 
     @PostMapping("/register")
-    public String register(@RequestBody @Valid UserRequest req) {
-        return userService.registerUser(req);
+    public ResponseEntity<?> register(@RequestBody @Valid UserRequest req) {
+        try {
+            userService.registerUser(req);
+            return ResponseEntity.ok("회원가입 성공");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @PostMapping("/login")
@@ -64,8 +69,16 @@ public class AuthController {
 
     // 비밀번호 재설정 요청 API
     @PostMapping("/password-reset/request")
-    public String requestPasswordReset(@RequestBody @Valid PasswordResetRequest request) {
-        return userService.requestPasswordReset(request);
+    public ResponseEntity<String> requestPasswordReset(@RequestBody @Valid PasswordResetRequest request) {
+        try {
+            String result = userService.requestPasswordReset(request);
+            System.out.println("Password reset result: " + result);  // 로그 추가
+            return ResponseEntity.ok(result);  // 200 OK
+        } catch (RuntimeException e) {
+            // 예외 메시지를 클라이언트에 전달, 상태 코드는 400 Bad Request 등으로 설정
+            System.out.println("Password reset error: " + e.getMessage());  // 로그 추가
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     // 비밀번호 재설정 확정 API
@@ -74,7 +87,7 @@ public class AuthController {
         return userService.confirmPasswordReset(request);
     }
 
-    @PutMapping("/auth/change-password")
+    @PutMapping("/change-password")
     public ResponseEntity<?> changePassword(@RequestBody @Valid PasswordChangeRequest request,
                                             Authentication authentication) {
         String email = authentication.getName();

@@ -33,7 +33,7 @@ public class UserService {
     @Transactional
     public String registerUser(UserRequest req) {
         if(userRepository.findByEmail(req.getEmail()).isPresent()){
-            return "이미 가입된 이메일입니다.";
+            throw new RuntimeException ("이미 가입된 이메일입니다.");
         }
 
         User user = User.builder()
@@ -112,7 +112,6 @@ public class UserService {
     public String requestPasswordReset(PasswordResetRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("등록되지 않은 이메일입니다."));
-
         // 기존에 있던 토큰 있으면 삭제
         passwordResetTokenRepository.deleteByUser(user);
 
@@ -126,8 +125,15 @@ public class UserService {
         passwordResetTokenRepository.save(resetToken);
 
         // 이메일 발송 (이메일 템플릿과 URL은 상황에 맞게 변경)
-        String resetUrl = "https://8080-mlee9999-authtest-q05q86trbs2.ws-us120.gitpod.io/auth/reset-password?token=" + token;
-        emailService.sendPasswordResetEmail(user.getEmail(), resetUrl);
+        // String resetUrl = "https://8080-mlee9999-authtest-q05q86trbs2.ws-us120.gitpod.io/auth/reset-password?token=" + token;
+        // System.out.println(resetUrl);
+        // emailService.sendPasswordResetEmail(user.getEmail(), resetUrl);
+        try {
+            emailService.sendPasswordResetEmail(user.getEmail(), token);
+        } catch (Exception e) {
+            System.err.println("이메일 전송 오류: " + e.getMessage());
+            throw new RuntimeException("이메일 전송 실패"); // 이 메시지가 뜨는 부분일 수 있음
+        }
 
         return "비밀번호 재설정 메일을 발송했습니다. 이메일을 확인하세요.";
     }

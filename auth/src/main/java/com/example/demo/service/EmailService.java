@@ -43,7 +43,15 @@ public class EmailService {
         mailMessage.setSubject(subject);
         mailMessage.setText(message);
 
-        mailSender.send(mailMessage);
+        try {
+            mailSender.send(mailMessage);
+            System.out.println("✅ Password reset email sent to: " + toEmail);
+            System.out.println("🔗 인증 URL 2 : " + resetUrl);
+        } catch (Exception e) {
+            System.err.println("❌ Password reset email send failed: " + e.getMessage());
+            System.out.println("🔗 인증 URL 2 : " + resetUrl);
+            throw new RuntimeException("이메일 전송 실패", e);
+        }
 
         System.out.println("비밀번호 재설정 이메일 발송 완료: " + toEmail);
     }
